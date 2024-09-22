@@ -38,5 +38,5 @@ Global Deployment: Ensure the software can be deployed and function seamlessly i
 | **CI/CD Integration** | Continuous Integration (CI) and Continuous Deployment (CD) must be deeply integrated into the system. |
 | **Testing** | Unit test cases and integration test cases should be inherent properties of the system. |
 
-### High Level Profile Update Flow
-![Profile Update Flow](./flow-profile-update.svg)
+### Architecture/Solution
+![Architecture & Solution Approach](./ARCHITECHTURE.MD)

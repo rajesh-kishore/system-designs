@@ -39,4 +39,4 @@ Global Deployment: Ensure the software can be deployed and function seamlessly i
 | **Testing** | Unit test cases and integration test cases should be inherent properties of the system. |
 
 ### Architecture/Solution
-![Architecture & Solution Approach](./ARCHITECHTURE.MD)
+[Architecture & Solution Approach](./ARCHITECHTURE.MD)

@@ -1,3 +1,11 @@
+### About Aadhar kind of system
+Aadhar kind of system is back bone of the country to identify the person's identity living in the country. Each country can have their own fields apart from uniquely identifying fields. The scale of the userbase can start from few thousands to billion.
+
+### Asuumptions
+Assume your software is already deployed and functioning for mulitple countries and users are already onboarded.
+Initial onboarding is done via system admin or some back channel.
+
+
 ### High-Level Requirement
 Objective: Design a profile update system that supports multiple countries, allowing the software to be used and deployed globally.
 

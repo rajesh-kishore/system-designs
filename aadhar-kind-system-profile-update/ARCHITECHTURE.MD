@@ -12,3 +12,6 @@
 
 ### High Level Profile Update Flow
 ![Profile Update Flow](./flow-profile-update.svg)
+
+### High Level Diagram/Components
+![High Level Diagram](./high-level-component.svg)

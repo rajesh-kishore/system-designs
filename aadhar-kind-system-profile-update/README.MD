@@ -35,7 +35,7 @@ Global Deployment: Ensure the software can be deployed and function seamlessly i
 | **Profile Updates** | The system should handle around 10 million profile updates per 24 hours, which is 1/10th of a billion. |
 | **Instantaneous Updates** | 20% of the 10 million updates (~2 million) do not require approval and should be instantaneous. |
 | **Approval Required Updates** | 80% of the 10 million updates (~8 million) require approval and, on average, need two attachment uploads. The maximum attachment size permitted is 25 MB. |
-| **Synchronous Update Response Time** | For profiles that can be updated synchronously, the p95 response time should be approximately 1 second. |
+| **Synchronous Update Response Time** | For profiles that can be updated synchronously, the p95 response time should be approximately 500 ms. |
 | **Asynchronous Update Response Time** | The p95 response time for capturing asynchronous update requests should be approximately 1 second. |
 | **Notification Latency** | The latency to notify the end user of profile updates should be approximately 1 second. |
 | **Data Sovereignty** | The system must address data sovereignty issues. |

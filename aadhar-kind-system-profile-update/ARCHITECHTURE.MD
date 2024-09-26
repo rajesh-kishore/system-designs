@@ -42,8 +42,41 @@
 - Supports synchronous and asynchronous operations.
 - Sends notifications upon completion of operations.
 
+### Handling request
+- UI submits the request for modification to the origin server.
+- Origin server needs to block the request so that it can accept request change, attachment.
+- Application Server santitizes the request and leverages virus scan service to scan the attachmeent before persisting the details (metatada + attachment) to db & blob storage.
+- Application redirects for MFA (such as email OTP) along with request id generated out of metadata + attachment.
+- On successfull validation of OTP, server submits the request to workflow engine for sync and async processing of request.
+- Workflow system can process the request sync/asysnc manner depending upon type of request.
+- Finally, server returns the request ID, along with other status.
 
-### API Definition(supports chunking)
+
+#### Metadata Schema Definition
+REQUEST_UPDATE - table
+ID - VARCHAR2(100) - PRIMARY_KEY
+FOR_USER - VARCHAR2(100) - SECONDARY INDEX
+REQUEST_BODY - JSON
+STATUS - VARCHAR2(100) - ACCEPTED, INPROGRESS, COMPLETED, REJECTED, WAITING_FOR_INFO, etc
+LAST_UPD_USR - VARCHAR2(100)
+LAST_UPD_TSTMP - TIMESTAMP
+
+REQUEST_UPDATE_ATTACHMENT - table
+ID - VARCHAR2(100) - PRIMARY_KEY
+REQUEST_UPDATE_ID - VARCHAR2(100) (FOREIGN_KEY(REQUEST_UPDATE table))
+DOC_LOCATION - VARCHAR2(100)
+SUPPORTING_ATTRIBUTE - VARCHAR2(100) (for which attribute document is uploaded ex: name, address, etc)
+LAST_UPD_USR - VARCHAR2(100)
+LAST_UPD_TSTMP - TIMESTAMP
+
+#### Blob storage
+- For each user request, we will create container(Azure blob container).
+- Within the container we will be creating folder to represent request id.
+- Under this folder, all the attachments will be uploaded.
+
+
+
+#### API Definition(supports chunking)
 
 | Field           | Value                                                                                       |
 |-----------------|---------------------------------------------------------------------------------------------|
@@ -72,12 +105,12 @@
 |                 | `<binary data>`                                                                             |
 |                 | `--boundary--`                                                                              |
 
-### API Response
+##### API Response
 | Status Code | Description                        | Response Body                                                                 |
 |-------------|------------------------------------|-------------------------------------------------------------------------------|
 | 200 OK      | Synchronous Operation              | `{ "Status": "Success", "request": "/api/v1/requests/2000" }`                 |
 | 202 Accepted| Asynchronous Operation             | `{ "Status": "InProgress", "request": "/api/v1/requests/2000" }`              |
-| 400 Bad Request | Client Validation Error        | `{ "Status": "Rejected", "error": "some exception" }`                                    |
+| 400 Bad Request | Client Validation Error        | `{ "Status": "Rejected", "error": "some exception" }`                              
 
 
-### Handling Scaling Requirement
+#### API Definition(supports chunking)

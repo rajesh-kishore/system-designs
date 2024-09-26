@@ -53,21 +53,28 @@
 
 
 #### Metadata Schema Definition
-REQUEST_UPDATE - table
-ID - VARCHAR2(100) - PRIMARY_KEY
-FOR_USER - VARCHAR2(100) - SECONDARY INDEX
-REQUEST_BODY - JSON
-STATUS - VARCHAR2(100) - ACCEPTED, INPROGRESS, COMPLETED, REJECTED, WAITING_FOR_INFO, etc
-LAST_UPD_USR - VARCHAR2(100)
-LAST_UPD_TSTMP - TIMESTAMP
 
-REQUEST_UPDATE_ATTACHMENT - table
-ID - VARCHAR2(100) - PRIMARY_KEY
-REQUEST_UPDATE_ID - VARCHAR2(100) (FOREIGN_KEY(REQUEST_UPDATE table))
-DOC_LOCATION - VARCHAR2(100)
-SUPPORTING_ATTRIBUTE - VARCHAR2(100) (for which attribute document is uploaded ex: name, address, etc)
-LAST_UPD_USR - VARCHAR2(100)
-LAST_UPD_TSTMP - TIMESTAMP
+##### REQUEST_UPDATE Table
+
+| Column Name       | Data Type         | Description                                      |
+|-------------------|-------------------|--------------------------------------------------|
+| ID                | VARCHAR2(100)     | PRIMARY_KEY                                      |
+| FOR_USER          | VARCHAR2(100)     | SECONDARY INDEX                                  |
+| REQUEST_BODY      | JSON              |                                                  |
+| STATUS            | VARCHAR2(100)     | ACCEPTED, INPROGRESS, COMPLETED, REJECTED, WAITING_FOR_INFO, etc |
+| LAST_UPD_USR      | VARCHAR2(100)     |                                                  |
+| LAST_UPD_TSTMP    | TIMESTAMP         |                                                  |
+
+##### REQUEST_UPDATE_ATTACHMENT Table
+
+| Column Name           | Data Type         | Description                                      |
+|-----------------------|-------------------|--------------------------------------------------|
+| ID                    | VARCHAR2(100)     | PRIMARY_KEY                                      |
+| REQUEST_UPDATE_ID     | VARCHAR2(100)     | FOREIGN_KEY (REFERENCES REQUEST_UPDATE table)    |
+| DOC_LOCATION          | VARCHAR2(100)     |                                                  |
+| SUPPORTING_ATTRIBUTE  | VARCHAR2(100)     | For which attribute document is uploaded (e.g., name, address, etc) |
+| LAST_UPD_USR          | VARCHAR2(100)     |                                                  |
+| LAST_UPD_TSTMP        | TIMESTAMP         |                                                  |
 
 #### Blob storage
 - For each user request, we will create container(Azure blob container).

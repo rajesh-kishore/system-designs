@@ -60,7 +60,7 @@
 |-------------------|-------------------|--------------------------------------------------|
 | ID                | VARCHAR2(100)     | PRIMARY_KEY                                      |
 | FOR_USER          | VARCHAR2(100)     | SECONDARY INDEX                                  |
-| REQUEST_BODY      | JSON              |                                                  |
+| REQUEST_BODY      | BLOB              |                                                  |
 | STATUS            | VARCHAR2(100)     | ACCEPTED, INPROGRESS, COMPLETED, REJECTED, WAITING_FOR_INFO, etc |
 | LAST_UPD_USR      | VARCHAR2(100)     |                                                  |
 | LAST_UPD_TSTMP    | TIMESTAMP         |                                                  |
@@ -76,11 +76,14 @@
 | LAST_UPD_USR          | VARCHAR2(100)     |                                                  |
 | LAST_UPD_TSTMP        | TIMESTAMP         |                                                  |
 
+##### High Level Size Estimations of Metadata Table
+- TBD - 
+
+
 #### Blob storage
 - For each user request, we will create container(Azure blob container).
 - Within the container we will be creating folder to represent request id.
 - Under this folder, all the attachments will be uploaded.
-
 
 
 #### API Definition(supports chunking)
@@ -144,3 +147,31 @@
 |                              |                                    |                                                                               |   }                                                                           |
 |                              |                                    |                                                                               | }                                                                             |
 | ...                          | ...                                | ...                                                                           | ...                                                                           |
+
+
+### Low Level Details
+
+#### How do we identify if the request qualifies for sync or async operation?
+- This is done by the workflow system which is already designed. At a high level, we just submit the `List<ChangedAttribute>` to the workflow in the following VO form:
+
+<details>
+  <summary>ChangedAttribute Class</summary>
+
+  ```java
+  class ChangedAttribute {
+     private String attributeName;
+     private String newAttributeValue;
+     private List<String> supportingDocumentationLocations;
+  }
+</details>
+- The workflow system has a list of rules which is configured to determine if a certain attribute change qualifies for an async operation.
+- The workflow system has its own underlying architecture to handle requests, which I am limiting to an abstract level for this use case. The workflow system is configured with Aadhar's system callback URI to send the response back in case of an async operation.
+- Aadhar's system callback URI updates the request status given the requestID and update profile data in DB eventually sends a notification to the user.
+- For fallback mechanism, Aadhar system has background job to keep updating the request status & updates profile data by polling the workflow system.
+
+#### How system is taking care of authorization aspect?
+- The system has home grown RBAC roles and permissions. By default it allows the profile owner and admin with specific role + permission to allow the update.
+- The java service layer takes care of authorization.
+
+### Handling scaling requirement
+

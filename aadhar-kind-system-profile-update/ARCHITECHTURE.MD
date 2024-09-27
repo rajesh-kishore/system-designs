@@ -153,7 +153,6 @@
 
 #### How do we identify if the request qualifies for sync or async operation?
 - This is done by the workflow system which is already designed. At a high level, we just submit the `List<ChangedAttribute>` to the workflow in the following VO form:
-
 <details>
   <summary>ChangedAttribute Class</summary>
 
@@ -166,8 +165,8 @@
 </details>
 
 - The workflow system has a list of rules which is configured to determine if a certain attribute change qualifies for an async operation.
-- The workflow system has its own underlying architecture to handle requests, which I am limiting to an abstract level for this use case. The workflow system is configured with Aadhar's system callback URI to send the response back in case of an async operation.
-- Aadhar's system callback URI updates the request status given the requestID and update profile data in DB eventually sends a notification to the user.
+- The workflow system has its own underlying architecture to handle requests, which I am limiting to an abstract level for this use case. The workflow system is configured with Aadhar system callback URI to send the response back in case of an async operation.
+- Aadhar system callback URI updates the request status given the requestID and update profile data in DB eventually sends a notification to the user.
 - For fallback mechanism, Aadhar system has background job to keep updating the request status & updates profile data by polling the workflow system.
 
 #### How system is taking care of authorization aspect?

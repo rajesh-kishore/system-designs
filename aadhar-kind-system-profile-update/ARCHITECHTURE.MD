@@ -164,6 +164,7 @@
      private List<String> supportingDocumentationLocations;
   }
 </details>
+
 - The workflow system has a list of rules which is configured to determine if a certain attribute change qualifies for an async operation.
 - The workflow system has its own underlying architecture to handle requests, which I am limiting to an abstract level for this use case. The workflow system is configured with Aadhar's system callback URI to send the response back in case of an async operation.
 - Aadhar's system callback URI updates the request status given the requestID and update profile data in DB eventually sends a notification to the user.

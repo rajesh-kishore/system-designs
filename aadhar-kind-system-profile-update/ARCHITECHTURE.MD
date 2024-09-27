@@ -87,7 +87,7 @@
 
 | Field           | Value                                                                                       |
 |-----------------|---------------------------------------------------------------------------------------------|
-| **API URI**     | `PATCH /api/v1/profile/internalID`                                                          |
+| **API URI**     | `PATCH /profilemanagement/v1/profiles/internalID`                                                          |
 | **Request Header** | `Content-Type: multipart/form-data`                                                      |
 | **Request Body**   |                                                                                          |
 |                 | `--boundary`                                                                                |
@@ -113,11 +113,34 @@
 |                 | `--boundary--`                                                                              |
 
 ##### API Response
-| Status Code | Description                        | Response Body                                                                 |
-|-------------|------------------------------------|-------------------------------------------------------------------------------|
-| 200 OK      | Synchronous Operation              | `{ "Status": "Success", "request": "/api/v1/requests/2000" }`                 |
-| 202 Accepted| Asynchronous Operation             | `{ "Status": "InProgress", "request": "/api/v1/requests/2000" }`              |
-| 400 Bad Request | Client Validation Error        | `{ "Status": "Rejected", "error": "some exception" }`                              
 
-
-#### API Definition(supports chunking)
+| Status Code                  | Description                        | Response Header                                                                 | Response Body                                                                 |
+|------------------------------|------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| 200 OK                       | Synchronous Operation              |                                                                               |                                                                               |
+| 202 Accepted                 | Asynchronous Operation             | HTTP/1.1 202 Accepted                                                         |                                                                               |
+|                              |                                    | Location: /profilemanagement/v1/requests/requestID                            |                                                                               |
+| 400 Bad Request              | Client Validation Error            |                                                                               | {                                                                             |
+|                              |                                    |                                                                               |   "error": {                                                                  |
+|                              |                                    |                                                                               |     "code": "0977658587",                                                     |
+|                              |                                    |                                                                               |     "message": "validation error"                                             |
+|                              |                                    |                                                                               |   }                                                                           |
+|                              |                                    |                                                                               | }                                                                             |
+| 401 Unauthorized             | Client Authentication Error        |                                                                               | {                                                                             |
+|                              |                                    |                                                                               |   "error": {                                                                  |
+|                              |                                    |                                                                               |     "code": "0977658581",                                                     |
+|                              |                                    |                                                                               |     "message": "User not authenticated"                                       |
+|                              |                                    |                                                                               |   }                                                                           |
+|                              |                                    |                                                                               | }                                                                             |
+| 403 Forbidden                | Client Authorization Error         |                                                                               | {                                                                             |
+|                              |                                    |                                                                               |   "error": {                                                                  |
+|                              |                                    |                                                                               |     "code": "0977658580",                                                     |
+|                              |                                    |                                                                               |     "message": "User not permitted to perform this operation"                 |
+|                              |                                    |                                                                               |   }                                                                           |
+|                              |                                    |                                                                               | }                                                                             |
+| 500 Internal Server Error    | Server Side Error                  |                                                                               | {                                                                             |
+|                              |                                    |                                                                               |   "error": {                                                                  |
+|                              |                                    |                                                                               |     "code": "0977658579",                                                     |
+|                              |                                    |                                                                               |     "message": "Issue occurred during operation."                             |
+|                              |                                    |                                                                               |   }                                                                           |
+|                              |                                    |                                                                               | }                                                                             |
+| ...                          | ...                                | ...                                                                           | ...                                                                           |

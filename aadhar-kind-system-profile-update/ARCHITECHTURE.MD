@@ -198,7 +198,7 @@ Again, it would vary based on other existing functionality being offered.
 | 4                    | 16                             | 5                        | 
 | 2                    | 8                              | 10                       | 
 
-#### Minimum number of Connection pool required per server
+#### Minimum number of Connections required per server(Connection Pool)
 
 Based on above table, if we take 8 cores then we can concurrently handle 32 requests. So, DB connection of 32 must be required to handle incoming requests.
 But DB operation wont take much time to perform the operation. So, we can keep 50 max connections as of now, rest of the figure will be cleared when we perform actual load testing using tools like JMeter.

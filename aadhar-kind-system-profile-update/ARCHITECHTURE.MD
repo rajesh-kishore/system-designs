@@ -173,13 +173,33 @@
 
 ### Handling Requests as per Normal Condition
 
+#### Total time per request
+
 | Task                          | Details                                                                                       | Time Taken      |
 |-------------------------------|-----------------------------------------------------------------------------------------------|-----------------|
 | **At 1 Gbps Attachment Upload** |                                                                                             |                 |
-| - Azure upload speed          | Typically between 1 Gbps to 10 Gbps, considering 1 Gbps speed (1000 Mbps)                     |                 |
+| - Azure vm upload speed         | Typically between 1 Gbps to 10 Gbps, considering 1 Gbps speed (1000 Mbps)                     |                 |
 | - 25 MB file                  | 25 MB * 8 = 200 Mb (megabits)                                                                 |                 |
 | - Upload time                 | 200 Mb / 1000 Mbps = 0.2 sec                                                                  | 0.2 sec         |
 | - Average 2 uploads per request | Total time for 2 uploads: 0.2 sec * 2 = 0.4 sec                                             | 0.4 sec         |
 | **Metadata request update**   | Should be in milliseconds                                                                     | 100 ms          |
 | **Sanitization of request**   | Should be in milliseconds                                                                     | 100 ms          |
 | **Total time taken to handle a request with upload** | Sum of all tasks: 0.4 sec (uploads) + 100 ms (metadata) + 100 ms (sanitization) | ~1 sec          |
+
+#### Minimum number of servers needed
+
+Since its I/O bound request, as a rule we should consider 4:1 rule i.e 4 concurrent requests per core.
+Again, it would vary based on other existing functionality being offered.
+
+| CPU Cores per Server | Concurrent requests per Core   | Number of Servers Needed( ~= 80 requests/Concurrent requests per Core) |
+|----------------------|--------------------------------|--------------------------|
+| 16                   | 64                             | 2                        |
+| 8                    | 32                             | 3                        |
+| 4                    | 16                             | 5                        | 
+| 2                    | 8                              | 10                       | 
+
+#### Minimum number of Connection pool required per server
+
+Based on above table, if we take 8 cores then we can concurrently handle 32 requests. So, DB connection of 32 must be required to handle incoming requests.
+But DB operation wont take much time to perform the operation. So, we can keep 50 max connections as of now, rest of the figure will be cleared when we perform actual load testing using tools like JMeter.
+

@@ -211,12 +211,18 @@ But DB operation wont take much time to perform the operation. So, we can keep 5
 - With 3 servers we are able to 80 requests then we would required atleast 25 servers to handle 800 concurrent requests.
 
 ### Addressing Security Requirement
-- Data at rest must be secured - we can leverage DB' TDE(Transparent Data Encryption) for same.
+- Data at rest must be secured - we can leverage DB' TDE(Transparent Data Encryption) for same. OOTB Blob storage offers encryption using AES 256.
 - Data in transit must be secured - We must leverage minimum TLS 1.2 for communication.
 - The system should not let bad data to get into system - for this we must sanitize the request, leverage virusscan service, leverage OWASP libraries to sanitize the request.
 - Allow only authenticated user to perform the operation - for this we are leveraging MFA of asking SMS pin.
 - Allow only authorized user to perform the operation - the system has home grown RBAC rules to address same.
 - Database secrets, etc must be stored in Vault.
+- The audit aspect must be maintained.
+
+
+### Purging Requirement
+- The data can be purged or archived by moving the data into cold storage.
+- The DB table can be further partitioned based on month or year.
 
 ### Observability
 - System is addressing the observability usecases by having proper logging mechanism and central log repository and alerting rules.
@@ -228,4 +234,5 @@ But DB operation wont take much time to perform the operation. So, we can keep 5
 ### High Availability Aspects
 - We can keep the system replicated in two or more availability zone, only one will be active at time, others will be in stand-by mode.
 - The DB can be synced in async manner.
+- The blob storage is ZRS enabled, if required we can enable Geo-ZRS as well.
 - If the situation demands we can also deploy the instance more than one region considering data sovereignty aspects.

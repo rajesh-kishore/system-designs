@@ -2,7 +2,7 @@
 Aadhar kind of system is back bone of the country to identify the person's identity living in the country. Each country can have their own fields apart from uniquely identifying fields. The scale of the userbase can start from few thousands to billion.
 
 ### Assumptions
-Assume your software is already deployed and functioning for mulitple countries and users are already onboarded.
+Assume your software is already deployed and functioning for multiple countries and users are already onboard.
 Initial onboarding is done via system admin or some back channel.
 
 
@@ -37,14 +37,10 @@ Global Deployment: Ensure the software can be deployed and function seamlessly i
 | **Approval Required Updates** | 80% of the 10 million updates (~8 million) require approval and, on average, need two attachment uploads. The maximum attachment size permitted is 25 MB. |
 | **Synchronous Update Response Time** | For profiles that can be updated synchronously, the p95 response time should be approximately 500 ms. |
 | **Asynchronous Update Response Time** | The p95 response time for capturing asynchronous update requests should be approximately 1 second. |
-| **Notification Latency** | The latency to notify the end user of profile updates should be approximately 1 second. |
-| **Data Sovereignty** | The system must address data sovereignty issues. |
-| **Data Security** | Data at rest and in transit must be secured. |
+ **Data Security** | Data at rest and in transit must be secured. |
 | **High Availability (HA)** | High availability is desirable, with a target of 99.9%. |
 | **System Security** | The system should be secure, with proper request sanitization, authentication, and authorization. |
-| **Observability and Quality** | Observability and quality must be fundamental aspects of the system. |
-| **CI/CD Integration** | Continuous Integration (CI) and Continuous Deployment (CD) must be deeply integrated into the system. |
-| **Testing** | Unit test cases and integration test cases should be inherent properties of the system. |
+| **Quality** | Observability and quality must be fundamental aspects of the system. |
 
 ### Architecture/Solution
 [Architecture & Solution Approach](./ARCHITECHTURE.MD)

@@ -36,7 +36,7 @@ Global Deployment: Ensure the software can be deployed and function seamlessly i
 | **Instantaneous Updates** | 20% of the 10 million updates (~2 million) do not require approval and should be instantaneous. |
 | **Approval Required Updates** | 80% of the 10 million updates (~8 million) require approval and, on average, need two attachment uploads. The maximum attachment size permitted is 25 MB. |
 | **Synchronous Update Response Time** | For profiles that can be updated synchronously, the p95 response time should be approximately 500 ms. |
-| **Asynchronous Update Response Time** | The p95 response time for capturing asynchronous update requests should be approximately 1 second. |
+| **Update Request Submission Time(with attachments of 25 MB size)** | The p95 response time for capturing update requests should not be more than 1 second. |
  **Data Security** | Data at rest and in transit must be secured. |
 | **High Availability (HA)** | High availability is desirable, with a target of 99.9%. |
 | **System Security** | The system should be secure, with proper request sanitization, authentication, and authorization. |

@@ -23,9 +23,7 @@ Global Deployment: Ensure the software can be deployed and function seamlessly i
 | **Approval Mechanism** | - Attributes like Salutation and Profile Photo can be updated instantly using OTP or similar MFA mechanisms without approval. <br> - Attributes such as Name, Sex, DOB, etc., require approval and additional document uploads. |
 | **Notifications** | Users should be notified of updates via email or SMS. |
 | **Scope** | The system is limited to a desktop application. |
-| **Approval Levels** | Only one level of approval is required. |
 | **Immutable Attributes** | Attributes like SSN/Aadhar number cannot be modified. |
-| **Attribute Size** | The size of attributes may vary by country. |
 
 ### Detailed Non-Functional Requirements
 

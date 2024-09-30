@@ -90,27 +90,36 @@
 
 | Field           | Value                                                                                       |
 |-----------------|---------------------------------------------------------------------------------------------|
-| **API URI**     | `PATCH /profilemanagement/v1/profiles/internalID`                                                          |
+| **API URI**     | `PATCH /profilemanagement/v1/profiles/internalID`                                           |
 | **Request Header** | `Content-Type: multipart/form-data`                                                      |
 | **Request Body**   |                                                                                          |
 |                 | `--boundary`                                                                                |
 |                 | `Content-Disposition: form-data; name="json"`                                               |
 |                 |                                                                                             |
 |                 | `{`                                                                                         |
-|                 | `  "lastName": "Doe",`                                                                      |
-|                 | `  "maritalStatus": "Single",`                                                              |
+|                 | `  "changedAttributes": [`                                                                 |
+|                 | `    { "attributeName": "lastName",`                                                        |
+|                 | `      "value": "Doe"`                                                                     |
+|                 | `    },`                                                                                    |
+|                 | `    { "attributeName": "maritalStatus",`                                                   |
+|                 | `      "value": "Single"`                                                                  |
+|                 | `    }`                                                                                     |
+|                 | `  ]`                                                                                       |
 |                 | `}`                                                                                         |
 |                 | `--boundary`                                                                                |
-|                 | `Content-Disposition: form-data; name="lastName-Attachment1"; filename="document1.pdf"`              |
+|                 | `Content-Disposition: form-data; name="lastName-Attachment1"; filename="document1.pdf"`     |
 |                 | `Content-Type: application/pdf`                                                             |
 |                 |                                                                                             |
 |                 | `<binary data>`                                                                             |
 |                 | `--boundary`                                                                                |
-|                 | `Content-Disposition: form-data; name="maritalStatus-attachment2"; filename="image1.png"`                 |
+|                 | `Content-Disposition: form-data; name="maritalStatus-attachment2"; filename="image1.png"`   |
 |                 | `Content-Type: image/png`                                                                   |
 |                 |                                                                                             |
 |                 | `<binary data>`                                                                             |
 |                 | `--boundary--`                                                                              |
+
+
+**Note that with key value pair approach, we can add additional attributes (different countries might have different attributes).**
 
 ##### API Response
 

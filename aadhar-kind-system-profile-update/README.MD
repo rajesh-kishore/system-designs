@@ -19,7 +19,7 @@ Global Deployment: Ensure the software can be deployed and function seamlessly i
 | Requirement | Description |
 |-------------|-------------|
 | **User Facing Flow** | The system should be designed for user-facing interactions. |
-| **Attributes** | The profile includes attributes such as Salutation, Last Name, First Name, Sex, Date of Birth (DOB), Profile Photo, Address (simple format), Aadhar number/SSN number, and custom attributes. |
+| **Attributes** | The profile includes attributes such as Salutation, Last Name, First Name, Sex, Date of Birth (DOB), Profile Photo, Address (simple format), Aadhar number/SSN number, and custom attributes(based on country) |
 | **Approval Mechanism** | - Attributes like Salutation and Profile Photo can be updated instantly using OTP or similar MFA mechanisms without approval. <br> - Attributes such as Name, Sex, DOB, etc., require approval and additional document uploads. |
 | **Notifications** | Users should be notified of updates via email or SMS. |
 | **Scope** | The system is limited to a desktop application. |

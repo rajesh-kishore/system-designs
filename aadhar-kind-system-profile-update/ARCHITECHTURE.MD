@@ -156,6 +156,9 @@
 ##### API Idempotence
 API is idempotent.
 
+##### Can there be direct upload of attachment from client?
+Yes, we may introduce but depends on security requirement- in this case blob can be uploaded using SAS(Shared Access Signature) URL. As this URL would be going via internet(from client's desktop to data center), this can be easily intercepted/logged across different servers. So, if requirement permits to do so then we can leverage it.
+
 ### Low Level Details
 
 #### How do we identify if the request qualifies for sync or async operation?

@@ -229,6 +229,7 @@ But DB operation wont take much time to perform the operation. So, we can keep 5
 - Allow only authenticated user to perform the operation - for this we are leveraging MFA of asking SMS pin.
 - Allow only authorized user to perform the operation - the system has home grown RBAC rules to address same.
 - Database secrets, etc must be stored in Vault.
+- Communication from Azure vm to blob is also authenticated & authorized using System Managed Identity + RBAC way to token generation using metadata server.
 - The audit aspect must be maintained.
 
 
